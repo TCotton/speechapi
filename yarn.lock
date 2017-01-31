@@ -759,6 +759,10 @@ filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
 
+filesize-parser@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/filesize-parser/-/filesize-parser-1.4.1.tgz#14b3446a3ef07af2e99018e42219c49bf08792f6"
+
 fill-range@^2.1.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-2.2.3.tgz#50b77dfd7e469bc7492470963699fe7a8485a723"
@@ -1646,7 +1650,7 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-nan@^2.0.0, nan@^2.2.0, nan@^2.3.0:
+nan@^2.0.0, nan@^2.2.0, nan@^2.3.0, nan@^2.3.5:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
 
@@ -1659,6 +1663,13 @@ nested-error-stacks@^1.0.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-1.0.2.tgz#19f619591519f096769a5ba9a86e6eeec823c3cf"
   dependencies:
     inherits "~2.0.1"
+
+node-expat@^2.3.15:
+  version "2.3.15"
+  resolved "https://registry.yarnpkg.com/node-expat/-/node-expat-2.3.15.tgz#96a53a0bc00649daf78f4fc074a23e644c223b4c"
+  dependencies:
+    bindings "^1.2.1"
+    nan "^2.3.5"
 
 node-forge@^0.6.46:
   version "0.6.48"

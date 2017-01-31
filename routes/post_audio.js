@@ -4,7 +4,7 @@ const speech = require('google-speech-api');
 const fs = require('fs');
 const fileType = require('file-type');
 const readChunk = require('read-chunk');
-const AV = require('av');
+const util = require('util');
 
 // [START speech_quickstart]
 // Imports the Google Cloud client library
@@ -95,22 +95,26 @@ router.post('/', function (req, res) {
 
     fstream.on('close', function () {
 
-      console.dir(global.AudioContext);
+      const mediainfo = require('../googleSpeech/mediainfo');
 
-      const asset = AV.Asset.fromFile(__dirname + '/files/' + filename);
-      asset.get('duration', function(duration) {
-        console.dir(duration);
-        // do something
+      mediainfo(__dirname + '/files/' + filename, function (err, res) {
+
+        if (err) {
+          return err;
+        }
+
+        console.log(util.inspect(res, null, null, true));
         res.send(true);
+
       });
 
-    /*  const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
-      const fileExt = fileType(buffer);
+      /*  const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
+       const fileExt = fileType(buffer);
 
-      asyncRecognize(__dirname + '/files/' + filename).then(function (returnedData) {
-        console.dir(returnedData);
-        res.send(JSON.stringify(returnedData));
-      });*/
+       asyncRecognize(__dirname + '/files/' + filename).then(function (returnedData) {
+       console.dir(returnedData);
+       res.send(JSON.stringify(returnedData));
+       });*/
 
     });
 
