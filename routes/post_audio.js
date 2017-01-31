@@ -25,15 +25,16 @@ router.post('/', function(req, res) {
 
   req.busboy.on('file', function(fieldname, file, filename) {
 
-    checkDirectory(__dirname + './logs/', function(error) {
+    checkDirectory(__dirname + '/files/', function(err) {
 
-      if (error) {
-        return error;
+      if (err) {
+        return err;
       } else {
 
         const fstream = fs.createWriteStream(__dirname + '/files/' + filename);
 
         file.pipe(fstream);
+
         fstream.on('close', function() {
 
           const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
