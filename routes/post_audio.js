@@ -85,6 +85,11 @@ function checkDirectory(directory, callback) {
 
 router.post('/', function (req, res) {
 
+  if (!fs.existsSync(__dirname + '/files/')) {
+    // Do something
+    fs.mkdirSync(__dirname + '/files/', '0777')
+  }
+
   req.pipe(req.busboy);
 
   req.busboy.on('file', function (fieldname, file, filename) {
@@ -97,15 +102,8 @@ router.post('/', function (req, res) {
 
       const mediainfo = require('../googleSpeech/mediainfo');
 
-      mediainfo(__dirname + '/files/' + filename, function (err, res) {
-
-        if (err) {
-          return err;
-        }
-
-        console.log(util.inspect(res, null, null, true));
-        res.send(true);
-
+      mediainfo([__dirname + '/files/' + filename]).then(function(data) {
+        console.log(data);
       });
 
       /*  const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);

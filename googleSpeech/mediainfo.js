@@ -1,39 +1,55 @@
-const child_process = require('child_process');
-const filesizeParser = require('filesize-parser');
+'use strict';
 const expat = require('node-expat');
+const childProcess = require('child_process');
+const fileSizeParser = require('filesize-parser');
+const fs = require('fs');
 
-module.exports = function() {
+const mediaInfoPath = process.env.MEDIAINFO_PATH || 'mediainfo';
 
-  const files = Array.prototype.slice.apply(arguments);
 
-  console.dir(files);
+/**
+ * @param {string[]} files
+ * @returns {Promise}
+ */
+function mediaInfo(files) {
 
-  const done = files.pop();
+  const promise = new Promise((resolve, reject) => {
+    childProcess.execFile(
+      mediaInfoPath,
+      ['--Output=XML'].concat(files),
+      (err, stdout) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(stdout);
+        }
+      }
+    );
+  });
 
-  child_process.execFile("mediainfo", ["--Output=XML"].concat(files), (err, stdout) => {
+  return promise.then(stdout => parse).catch(err => console.log(err));
+}
 
-    console.dir('before this');
-
-    if (err) {
-      return done(err);
-    }
-
-    console.dir('after this');
-
+/**
+ * @param stdout
+ * @returns {Promise}
+ */
+function parse(stdout) {
+  return new Promise((resolve, reject) => {
+    const parser = new expat.Parser();
     const files = [];
+
     let file = null;
     let track = null;
     let key = null;
 
-    const parser = new expat.Parser();
-
-    parser.on("startElement", (name, attribs) => {
+    parser.on('startElement', (name, attributes) => {
       name = name.toLowerCase();
 
       if (file === null && name === "file") {
-        file = {tracks: []};
+        file = { tracks: [] };
 
-        for (let k in attribs) {
+        for (var k in attribs) {
           file[k.toLowerCase()] = attribs[k];
         }
 
@@ -41,12 +57,12 @@ module.exports = function() {
       }
 
       if (track === null && name === "track") {
-        if (attribs.type === "General") {
+        if (attributes.type === "General") {
           track = file;
         } else {
           track = {};
 
-          for (let k in attribs) {
+          for (var k in attributes) {
             track[k.toLowerCase()] = attribs[k];
           }
         }
@@ -63,13 +79,15 @@ module.exports = function() {
       name = name.toLowerCase();
 
       if (track !== null && name === "track") {
-        if (track !== file) { file.tracks.push(track); }
+        if (track !== file) {
+          file.tracks.push(track);
+        }
         track = null;
       }
 
       if (file !== null && name === "file") {
         if (file.file_size) {
-          file.file_size_bytes = filesizeParser(file.file_size);
+          file.file_size_bytes = fileSizeParser(file.file_size);
         }
 
         files.push(file);
@@ -86,10 +104,12 @@ module.exports = function() {
       }
     });
 
-    if (!parser.parse(stdout)) {
-      return done(Error(parser.getError()));
+    if (parser.parse(stdout)) {
+      resolve(files);
+    } else {
+      reject(parser.getError());
     }
-
-    return done(null, files);
   });
-};
+}
+
+module.exports = mediaInfo;
