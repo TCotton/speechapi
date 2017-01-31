@@ -30,19 +30,23 @@ function asyncRecognize(filename) {
   return speech.startRecognition(filename, config)
     .then((results) => {
       const operation = results[0];
+      console.dir(operation);
       // Get a Promise represention the final result of the job
       return operation.promise();
     })
     .then((transcription) => {
       console.log(`Transcription: ${transcription}`);
       return transcription;
+    }).catch((failed) => {
+      console.log(`failed: ${failed}`);
+      return failed;
     });
 }
 // [END speech_async_recognize]
 
 //function will check if a directory exists, and create it if it doesn't
 function checkDirectory(directory, callback) {
-  fs.stat(directory, function (err) {
+  fs.stat(directory, function(err) {
     //Check if error defined and the error code is "not exists"
     if (err && err.errno === 34) {
       //Create the directory, call the callback.
@@ -54,34 +58,25 @@ function checkDirectory(directory, callback) {
   });
 }
 
-router.post('/', function (req, res) {
+router.post('/', function(req, res) {
 
   req.pipe(req.busboy);
 
-  req.busboy.on('file', function (fieldname, file, filename) {
+  req.busboy.on('file', function(fieldname, file, filename) {
 
-    checkDirectory(__dirname + '/files/', function (err) {
+    const fstream = fs.createWriteStream(__dirname + '/files/' + filename);
 
-      if (err) {
-        return err;
-      } else {
+    file.pipe(fstream);
 
-        const fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+    fstream.on('close', function() {
 
-        file.pipe(fstream);
+      const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
+      const fileExt = fileType(buffer);
 
-        fstream.on('close', function () {
-
-          const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
-          const fileExt = fileType(buffer);
-
-          asyncRecognize(__dirname + '/files/' + filename).then(function (returnedData) {
-            res.send(JSON.stringify(returnedData));
-          });
-
-        });
-
-      }
+      asyncRecognize(__dirname + '/files/' + filename).then(function(returnedData) {
+        console.dir(returnedData);
+        res.send(JSON.stringify(returnedData));
+      });
 
     });
 

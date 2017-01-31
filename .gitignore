@@ -3,3 +3,5 @@
 node_modules/
 *.log
 *Project-ff36826dd0b9.json
+bin/
+routes/files/
