@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+    .wrapper.pure-u-1
+        .form-wrapper
+
+            h1= title
+            p welcome to the #{title}
+
+                p submit an audio or video file to the Google Speech API
+                p the returned transcribed file is below
+
+                form(name='add-audio-file', method='post', class='pure-form', action='/audio', enctype='multipart/form-data')
+                    fieldset
+                        .pure-control-group
+                            label(for='audio-file') audio file
+                            input(type='file', name='title', id='audio-file' accept='.mp3,audio/*,video/mp4,video/x-m4v,video/*')
+                        input(type='submit', value='submit file', class='pure-button pure-button-primary')
