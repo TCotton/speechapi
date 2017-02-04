@@ -1,66 +1,46 @@
-const module = (function() {
+const module = (function () {
 
   const _private = {
 
-    formSubmit: function() {
+    submit: function (audioNumber) {
 
-      document.querySelector('.pure-form').addEventListener('submit', function(e) {
+      let uri = '/audio?id=';
+      const xhr = new XMLHttpRequest();
 
-        e.preventDefault();
+      xhr.open('GET', uri + audioNumber);
+      xhr.onreadystatechange = function () {
 
-        if (!e.target.querySelector('#audio-file').files[0]) {
-          return;
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.dir(xhr.responseText);
         }
 
-        const uri = '/audio';
-        const xhr = new XMLHttpRequest();
-        const fd = new FormData();
+      };
 
-        xhr.open('POST', uri, true);
-        xhr.onreadystatechange = function() {
-
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            alert(xhr.responseText);
-          }
-
-        };
-
-        fd.append('audioFile', e.target.querySelector('#audio-file').files[0]);
-        xhr.send(fd);
-      });
+      xhr.send();
 
     },
 
-    onDrop: function() {
+    onDrop: function () {
 
-      console.log('drop here');
-
-      document.querySelector('.audio-section:first-of-type').addEventListener('dragstart', function(event) {
+      document.querySelector('.audio-section:first-of-type').addEventListener('dragstart', function (event) {
         console.log('drag start');
-        event.dataTransfer.setData('text/plain', 'This text may be dragged');
+        event.dataTransfer.setData('text/plain', event.target.dataset.audio);
         event.dataTransfer.effectAllowed = 'copyMove';
         event.dataTransfer.dropEffect = 'copy';
-        console.dir(event.dataTransfer);
       });
 
-      document.querySelector('.header').addEventListener('dragover', function(e){
-        console.log('here');
-        console.log('dragover');
+      document.querySelector('header').addEventListener('dragover', function (e) {
         e.preventDefault();
       });
 
-      document.querySelector('.header').addEventListener('dragenter', function(e){
-        console.log('dragenter');
+      document.querySelector('header').addEventListener('dragenter', function (e) {
         e.preventDefault();
       });
 
-      document.querySelector('.header').addEventListener('drop', function(event){
+      document.querySelector('header').addEventListener('drop', function (event) {
         const data = event.dataTransfer.getData('text/plain');
-        console.log(data);
-      });
-
-      document.querySelector('.header').addEventListener('dragend', function(){
-        console.log('dragend');
+        _private.submit(data);
+        // audio-samples/marx-audio.flac
       });
 
     }
@@ -68,7 +48,7 @@ const module = (function() {
   };
 
   return {
-    facade: function() {
+    facade: function () {
       _private.onDrop();
     }
   }

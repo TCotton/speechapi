@@ -83,36 +83,36 @@ function checkDirectory(directory, callback) {
   });
 }
 
-router.post('/', function (req, res) {
+function getAudioData(type) {
 
-  if (!fs.existsSync(__dirname + '/files/')) {
-    // Do something
-    fs.mkdirSync(__dirname + '/files/', '0777')
-  }
+  const audioURI = {
+    '1': function () {
+      return 'audio-samples/testing-one.flac';
+    },
+    '2': function () {
+      return 'audio-samples/testing-two.flac';
+    },
+    '3': function () {
+      return 'audio-samples/testing-three.flac';
+    },
+    '4': function () {
+      return 'audio-samples/marx-audio.flac';
+    }
+  };
 
-  req.pipe(req.busboy);
+  return audioURI[type]();
+}
 
-  req.busboy.on('file', function (fieldname, file, filename) {
+router.get('/', function (req, res) {
 
-    const fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+  console.log('router.get');
+  console.log(req.params.id);
 
-    file.pipe(fstream);
+  res.json({id: req.param('id')});
 
-    fstream.on('close', function () {
-
-      res.send(true);
-
-      /*  const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
-       const fileExt = fileType(buffer);
-
-       asyncRecognize(__dirname + '/files/' + filename).then(function (returnedData) {
-       console.dir(returnedData);
-       res.send(JSON.stringify(returnedData));
-       });*/
-
-    });
-
-  });
+/*  asyncRecognize('public/' + getAudioData(req.param('id'))).then(function (returnedData) {
+    console.dir(returnedData);
+  });*/
 
 });
 

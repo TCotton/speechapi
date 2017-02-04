@@ -5,7 +5,7 @@ block content
     .wrapper.pure-u-1
         .form-wrapper
 
-            .header
+            header
 
                 h1= title
                 p welcome to the #{title}
@@ -16,7 +16,7 @@ block content
                 p when the transcribed text appears it will be possible to play the audio file
 
                 audio(controls='')
-                    source(src='audio-samples/marx-audio.flac', type='audio/flac')
+                    source(src='', type='audio/flac')
 
             section.audio-section(data-audio = '1', draggable='true')
 
