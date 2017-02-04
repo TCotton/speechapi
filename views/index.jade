@@ -15,65 +15,68 @@ block content
                 p this will make a call to the remote Google Speech API
                 p when the transcribed text appears it will be possible to play the audio file
 
-                audio(controls='')
+                audio(controls='', class='audio')
                     source(src='', type='audio/flac')
 
-                span.display-text.hide
+                p.display-text
 
-            section.audio-section(data-audio = '1', draggable='true')
+            section.audio-wrapper
 
-                    h3 audio sample one
+                section.audio-section(data-audio = '1', draggable='true')
 
-                    pre
-                        code.prettyprint
-                            File Size: 372k
-                            | Bit Rate: 354k
-                            | Encoding: FLAC
-                            | Channels: 1 @ 16-bit
-                            | Samplerate: 44100Hz
-                            | Replaygain: off
-                            | Duration: 00:00:08.39
+                        h3 audio sample one
 
-                section.audio-section(data-audio = '2', draggable='true')
+                        pre
+                            code.prettyprint
+                                File Size: 372k
+                                | Bit Rate: 354k
+                                | Encoding: FLAC
+                                | Channels: 1 @ 16-bit
+                                | Samplerate: 44100Hz
+                                | Replaygain: off
+                                | Duration: 00:00:08.39
 
-                    h3 audio sample two
+                    section.audio-section(data-audio = '2', draggable='true')
 
-                    pre
-                        code.prettyprint
-                            File Size: 723k
-                            | Bit Rate: 364k
-                            | Encoding: FLAC
-                            | Channels: 1 @ 16-bit
-                            | Samplerate: 44100Hz
-                            | Replaygain: off
-                            | Duration: 00:00:15.90
+                        h3 audio sample two
 
-                section.audio-section(data-audio = '3', draggable='true')
+                        pre
+                            code.prettyprint
+                                File Size: 723k
+                                | Bit Rate: 364k
+                                | Encoding: FLAC
+                                | Channels: 1 @ 16-bit
+                                | Samplerate: 44100Hz
+                                | Replaygain: off
+                                | Duration: 00:00:15.90
 
-                    h3 audio sample three
+                    section.audio-section(data-audio = '3', draggable='true')
 
-                    pre
-                        code.prettyprint
-                            File Size: 679k
-                            | Bit Rate: 287k
-                            | Encoding: FLAC
-                            | Channels: 1 @ 16-bit
-                            | Samplerate: 44100Hz
-                            | Replaygain: off
-                            | Duration: 00:00:18.91
+                        h3 audio sample three
 
-                section.audio-section(data-audio = '4', draggable='true')
+                        pre
+                            code.prettyprint
+                                File Size: 679k
+                                | Bit Rate: 287k
+                                | Encoding: FLAC
+                                | Channels: 1 @ 16-bit
+                                | Samplerate: 44100Hz
+                                | Replaygain: off
+                                | Duration: 00:00:18.91
 
-                    h3 audio sample four
+                    section.audio-section(data-audio = '4', draggable='true')
 
-                    pre
-                        code.prettyprint
-                            File Size: 1.17M
-                            | Bit Rate: 329k
-                            | Encoding: FLAC
-                            | Channels: 1 @ 16-bit
-                            | Samplerate: 44100Hz
-                            | Replaygain: off
-                            | Duration: 00:00:28.42
+                        h3 audio sample four
 
+                        pre
+                            code.prettyprint
+                                File Size: 1.17M
+                                | Bit Rate: 329k
+                                | Encoding: FLAC
+                                | Channels: 1 @ 16-bit
+                                | Samplerate: 44100Hz
+                                | Replaygain: off
+                                | Duration: 00:00:28.42
 
+    .loading-wrapper.visuallyhidden
+        span.loading.dots2.loading

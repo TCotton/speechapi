@@ -31,7 +31,7 @@ p {
   margin: 0 0 1.38888888889em 0;
 }
 
-label, input, input[type=submit], input[type='file']  {
+label, input, input[type=submit], input[type='file'] {
   font-size: 1.6em;
   margin: 0 0 1.5625em 0;
 }
@@ -75,4 +75,39 @@ pre {
 
 .show {
   display: block
+}
+
+.loading-wrapper {
+  width: 10%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.opacity10 {
+  opacity: 0.1;
+}
+
+.opacity20 {
+  opacity: 0.2;
+}
+
+.visuallyhidden {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.loading {
+  font-size: 15em;
 }

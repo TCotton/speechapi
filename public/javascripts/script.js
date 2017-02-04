@@ -12,6 +12,12 @@ const module = (function () {
 
         if (xhr.readyState === 4 && xhr.status === 200) {
           console.dir(xhr.responseText);
+          const response = JSON.parse(xhr.responseText);
+          document.querySelector('.wrapper').classList.remove('opacity20');
+          document.querySelector('.loading-wrapper').classList.add('visuallyhidden');
+          document.querySelector('.audio').src = response.uri;
+          document.querySelector('.audio').autoplay = true;
+          document.querySelector('.display-text').innerHTML = '<strong>Transcription: </strong><em>' + response.transcription + '</em>';
         }
 
       };
@@ -22,12 +28,15 @@ const module = (function () {
 
     onDrop: function () {
 
-      document.querySelector('.audio-section:first-of-type').addEventListener('dragstart', function (event) {
-        console.log('drag start');
-        event.dataTransfer.setData('text/plain', event.target.dataset.audio);
-        event.dataTransfer.effectAllowed = 'copyMove';
-        event.dataTransfer.dropEffect = 'copy';
+      document.querySelectorAll('.audio-section').forEach((item) => {
+        item.addEventListener('dragstart', function (event) {
+          event.dataTransfer.setData('text/plain', event.target.dataset.audio);
+          event.dataTransfer.effectAllowed = 'copyMove';
+          event.dataTransfer.dropEffect = 'copy';
+        });
       });
+
+      document.querySelector('.audio-section:first-of-type');
 
       document.querySelector('header').addEventListener('dragover', function (e) {
         e.preventDefault();
@@ -39,6 +48,8 @@ const module = (function () {
 
       document.querySelector('header').addEventListener('drop', function (event) {
         const data = event.dataTransfer.getData('text/plain');
+        document.querySelector('.wrapper').classList.add('opacity20');
+        document.querySelector('.loading-wrapper').classList.remove('visuallyhidden');
         _private.submit(data);
       });
 
