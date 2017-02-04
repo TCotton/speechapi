@@ -78,5 +78,11 @@ block content
                                 | Replaygain: off
                                 | Duration: 00:00:28.42
 
+            p play track below with captions
+
+            audio(controls='', class='audio')
+                source(src='audio-samples/marx-audio-large.flac', type='audio/flac')
+                track(kind='captions', src='audio-samples/captions.vtt', srclang='en' label='English')
+
     .loading-wrapper.visuallyhidden
         span.loading.dots2.loading
