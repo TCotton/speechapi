@@ -68,3 +68,11 @@ pre {
   font-family: monospace;
   margin: 0 0 1.78571428571em 0;
 }
+
+.hide {
+  display: none
+}
+
+.show {
+  display: block
+}

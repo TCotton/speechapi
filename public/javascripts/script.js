@@ -40,7 +40,6 @@ const module = (function () {
       document.querySelector('header').addEventListener('drop', function (event) {
         const data = event.dataTransfer.getData('text/plain');
         _private.submit(data);
-        // audio-samples/marx-audio.flac
       });
 
     }
