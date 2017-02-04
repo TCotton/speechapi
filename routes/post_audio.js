@@ -100,11 +100,7 @@ router.post('/', function (req, res) {
 
     fstream.on('close', function () {
 
-      const mediainfo = require('../googleSpeech/mediainfo');
-
-      mediainfo([__dirname + '/files/' + filename]).then(function(data) {
-        console.log(data);
-      });
+      res.send(true);
 
       /*  const buffer = readChunk.sync(__dirname + '/files/' + filename, 0, 4100);
        const fileExt = fileType(buffer);

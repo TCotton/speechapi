@@ -5,15 +5,73 @@ block content
     .wrapper.pure-u-1
         .form-wrapper
 
-            h1= title
-            p welcome to the #{title}
+            .header
+
+                h1= title
+                p welcome to the #{title}
 
                 p submit an audio or video file to the Google Speech API
-                p the returned transcribed file is below
+                p drag and drop the audio sections onto the player
+                p this will make a call to the remote Google Speech API
+                p when the transcribed text appears it will be possible to play the audio file
 
-                form(name='add-audio-file', method='post', class='pure-form', action='/audio', enctype='multipart/form-data')
-                    fieldset
-                        .pure-control-group
-                            label(for='audio-file') audio file
-                            input(type='file', name='title', id='audio-file' accept='.mp3,audio/*,video/mp4,video/x-m4v,video/*')
-                        input(type='submit', value='submit file', class='pure-button pure-button-primary')
+                audio(controls='')
+                    source(src='audio-samples/marx-audio.flac', type='audio/flac')
+
+            section.audio-section(data-audio = '1', draggable='true')
+
+                    h3 audio sample one
+
+                    pre
+                        code.prettyprint
+                            File Size: 372k
+                            | Bit Rate: 354k
+                            | Encoding: FLAC
+                            | Channels: 1 @ 16-bit
+                            | Samplerate: 44100Hz
+                            | Replaygain: off
+                            | Duration: 00:00:08.39
+
+                section.audio-section(data-audio = '2', draggable='true')
+
+                    h3 audio sample two
+
+                    pre
+                        code.prettyprint
+                            File Size: 723k
+                            | Bit Rate: 364k
+                            | Encoding: FLAC
+                            | Channels: 1 @ 16-bit
+                            | Samplerate: 44100Hz
+                            | Replaygain: off
+                            | Duration: 00:00:15.90
+
+                section.audio-section(data-audio = '3', draggable='true')
+
+                    h3 audio sample three
+
+                    pre
+                        code.prettyprint
+                            File Size: 679k
+                            | Bit Rate: 287k
+                            | Encoding: FLAC
+                            | Channels: 1 @ 16-bit
+                            | Samplerate: 44100Hz
+                            | Replaygain: off
+                            | Duration: 00:00:18.91
+
+                section.audio-section(data-audio = '4', draggable='true')
+
+                    h3 audio sample four
+
+                    pre
+                        code.prettyprint
+                            File Size: 1.17M
+                            | Bit Rate: 329k
+                            | Encoding: FLAC
+                            | Channels: 1 @ 16-bit
+                            | Samplerate: 44100Hz
+                            | Replaygain: off
+                            | Duration: 00:00:28.42
+
+

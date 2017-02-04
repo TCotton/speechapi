@@ -2,7 +2,7 @@ body {
   font-size: 62.5%;
   font-family: 'Droid Sans Mono', monospace;
   font-weight: 400;
-  line-height: 2.5;
+  line-height: 2.5em;
 }
 
 .wrapper {
@@ -21,9 +21,14 @@ h1 {
   margin: 0 0 1.13636363636em 0;
 }
 
+h3 {
+  font-size: 1.8em;
+
+}
+
 p {
   font-size: 1.8em;
-  margin: 0 ;
+  margin: 0 0 1.38888888889em 0;
 }
 
 label, input, input[type=submit], input[type='file']  {
@@ -36,6 +41,15 @@ input[type=file] {
   -webkit-box-sizing: border-box;
 }
 
+audio {
+  font-size: 1.6em;
+  margin: 1.5625em 0;
+}
+
+.audio-section {
+  margin: 0 0 1.5625em 0;
+  cursor: move;
+}
 
 input[type=file]::-webkit-file-upload-button {
   border: none;
@@ -47,4 +61,10 @@ input[type=file]::-webkit-file-upload-button {
 
 input[type=submit] {
   margin: 20px 0 0 0;
+}
+
+pre {
+  font-size: 14px;
+  font-family: monospace;
+  margin: 0 0 1.78571428571em 0;
 }

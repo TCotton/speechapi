@@ -27,7 +27,40 @@ const module = (function() {
 
         fd.append('audioFile', e.target.querySelector('#audio-file').files[0]);
         xhr.send(fd);
+      });
 
+    },
+
+    onDrop: function() {
+
+      console.log('drop here');
+
+      document.querySelector('.audio-section:first-of-type').addEventListener('dragstart', function(event) {
+        console.log('drag start');
+        event.dataTransfer.setData('text/plain', 'This text may be dragged');
+        event.dataTransfer.effectAllowed = 'copyMove';
+        event.dataTransfer.dropEffect = 'copy';
+        console.dir(event.dataTransfer);
+      });
+
+      document.querySelector('.header').addEventListener('dragover', function(e){
+        console.log('here');
+        console.log('dragover');
+        e.preventDefault();
+      });
+
+      document.querySelector('.header').addEventListener('dragenter', function(e){
+        console.log('dragenter');
+        e.preventDefault();
+      });
+
+      document.querySelector('.header').addEventListener('drop', function(event){
+        const data = event.dataTransfer.getData('text/plain');
+        console.log(data);
+      });
+
+      document.querySelector('.header').addEventListener('dragend', function(){
+        console.log('dragend');
       });
 
     }
@@ -36,7 +69,7 @@ const module = (function() {
 
   return {
     facade: function() {
-      _private.formSubmit();
+      _private.onDrop();
     }
   }
 
