@@ -8,7 +8,6 @@ const http = require('http');
 const busboy = require('connect-busboy');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
 const audioRoute = require('./routes/post_audio');
 
 const app = express();
@@ -27,7 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(busboy());
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/audio', audioRoute);
 
 // catch 404 and forward to error handler

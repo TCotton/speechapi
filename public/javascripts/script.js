@@ -1,4 +1,4 @@
-const module = (function () {
+const module = (function (Popcorn) {
 
   const _private = {
 
@@ -53,6 +53,18 @@ const module = (function () {
         _private.submit(data);
       });
 
+    },
+
+    popcorn: function () {
+
+      Popcorn('#audio-example', {
+        defaults: {
+          subtitle: {
+            target: 'footnote'
+          }
+        }
+      });
+
     }
 
   };
@@ -60,9 +72,10 @@ const module = (function () {
   return {
     facade: function () {
       _private.onDrop();
+      // _private.popcorn();
     }
   }
 
-}());
+}(Popcorn));
 
 module.facade();

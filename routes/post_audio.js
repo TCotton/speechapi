@@ -39,9 +39,6 @@ function getAudioData(type) {
 
 router.get('/', function(req, res) {
 
-  console.log('router.get');
-  console.log(req.query.id);
-
   // Detects speech in the audio file
   speechClient.recognize('public/' + getAudioData(req.query.id), options).then(function(results) {
 

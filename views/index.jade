@@ -80,9 +80,10 @@ block content
 
             p play track below with captions
 
-            audio(controls='', class='audio')
+            audio(controls='', class='audio', id='audio-example', data-timeline-sources='audio-samples/captions.vtt')
                 source(src='audio-samples/marx-audio-large.flac', type='audio/flac')
                 track(kind='captions', src='audio-samples/captions.vtt', srclang='en' label='English')
+            #footnote
 
     .loading-wrapper.visuallyhidden
         span.loading.dots2.loading

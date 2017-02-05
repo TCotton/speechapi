@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "startDev": "nodemon app.js",
     "debug": "nodemon --inspect app.js",
     "generate": "node app.js async ./routes/files/audio-clip-one.m4a"
   },

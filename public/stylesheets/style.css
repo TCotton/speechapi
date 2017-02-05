@@ -9,7 +9,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0 0 0;
+  margin: 20px 0;
 }
 
 .form-wrapper {
@@ -77,6 +77,16 @@ pre {
   display: block
 }
 
+.audio-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.audio-section {
+  flex: 1;
+}
+
 .loading-wrapper {
   width: 10%;
   height: 50%;
@@ -95,6 +105,20 @@ pre {
 
 .opacity20 {
   opacity: 0.2;
+}
+
+#footnote ~ div {
+  position: relative!important;
+  color: rgba(0, 0, 0, 0.8)!important;
+  text-shadow: none!important;
+  font-weight: normal!important;
+  text-align: left!important;
+  font-size: 15px!important;
+  font-family: monospace;
+  font-style: italic;
+  width: 300px;
+  top: auto!important;
+  left: 0!important;
 }
 
 .visuallyhidden {
